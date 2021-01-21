@@ -9,14 +9,14 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import BookmarkIcon from '@material-ui/icons/Bookmark'
 import HistoryIcon from '@material-ui/icons/History'
 import GroupIcon from '@material-ui/icons/Group'
+import { useStateValue } from './StateProvider'
 
 function Sidebar() {
+    const [{ user }, dispatch] = useStateValue()
+
     return (
         <div>
-            <SidebarRow
-                title="Gautam PB"
-                src="https://www.facebook.com/photo?fbid=452427915330448&set=a.452427945330445"
-            />
+            <SidebarRow title={user.displayName} src={user.photoURL} />
 
             <SidebarRow
                 title="COVID-19 Information Center"

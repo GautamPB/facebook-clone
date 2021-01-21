@@ -1,13 +1,20 @@
-import { FiberPinRounded } from '@material-ui/icons'
 import React from 'react'
 import '../styles/Login.css'
 import { auth, provider } from '../firebase'
+import { useStateValue } from './StateProvider'
+import { actionTypes } from './reducer'
 
 function Login() {
+    const [state, dispatch] = useStateValue()
+
     const signin = () => {
         auth.signInWithPopup(provider)
             .then((result) => {
-                console.log(result)
+                console.log(result.user)
+                dispatch({
+                    type: 'SET_USER',
+                    user: result.user,
+                })
             })
             .catch((error) => {
                 console.log(error.message)
